@@ -1,5 +1,5 @@
 <template>
-  <div class="board bg-indigo-100">
+  <div class="board bg-indigo-100 h-full overflow-auto">
     Board
   </div>
 </template>
