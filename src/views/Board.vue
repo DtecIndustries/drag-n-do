@@ -1,15 +1,36 @@
 <template>
   <div class="board bg-indigo-100 h-full overflow-auto">
-    Board
+    <div class="flex flex-row items-start">
+      <div class="column" v-for="(column, $columnIndex) in board.columns" :key="$columnIndex">
+        <div class="flex items-center mb-2 font-bold">
+          {{ column.name }}
+        </div>
+        <div class="list-reset">
+          <div class="task" v-for="(task, $taskIndex) in column.tasks" :key="$taskIndex">
+            <span class="w-full text-left font-bold">{{ task.name }}</span>
+            <p v-if="task.description" class="text-sm mt-1">{{ task.description }}</p>
+            {{ task }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  computed: mapState(['board'])
 }
 </script>
 
 <style>
-
+.column{
+  @apply bg-gray-100 p-2 mr-4;
+  min-width: 350px;
+}
+.task {
+  @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded bg-white no-underline;
+}
 </style>
