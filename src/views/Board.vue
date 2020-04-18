@@ -12,8 +12,12 @@
             @click="goToTask(task)">
             <span class="w-full text-left font-bold">{{ task.name }}</span>
             <p v-if="task.description" class="text-sm mt-1">{{ task.description }}</p>
-            {{ task }}
           </div>
+          <input 
+            type="text"
+            class="block p-2 w-full bg-transparant"
+            placeholder="+ Enter new task"
+            @keyup.enter="createTask($event, column.tasks)">
         </div>
       </div>
     </div>
@@ -42,6 +46,13 @@ export default {
     },
     close(){
       this.$router.push({ name: 'board' })
+    },
+    createTask(e, tasks){
+      this.$store.commit('CREATE_TASK', {
+        tasks,
+        name: e.target.value
+      })
+      e.target.value = ''
     }
   }
 }
